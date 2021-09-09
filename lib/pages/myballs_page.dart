@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 class MyBallPage extends StatefulWidget {
+  static final String id = "myballs_page";
   const MyBallPage({Key? key}) : super(key: key);
 
   @override

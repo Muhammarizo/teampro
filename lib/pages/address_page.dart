@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teampro/constants.dart';
 
 class AdressPage extends StatefulWidget {
+  static final String id = "address_page";
   const AdressPage({Key? key}) : super(key: key);
 
   @override
