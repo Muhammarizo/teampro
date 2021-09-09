@@ -101,7 +101,7 @@ class _MyCuponsPageState extends State<MyCuponsPage> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 8,
             itemBuilder: (context, i){
-              return cupons(1, "", "", "", "", "");
+              return cupons(1, "dfd", "adsda", "asda", "sadas", "asdasd");
             },
           ),
         ],
@@ -115,20 +115,57 @@ class _MyCuponsPageState extends State<MyCuponsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 25),
+            padding: EdgeInsets.only(left: 25, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("№", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Код купона: $code"),
-                Text("Тип купона: $type"),
-                Text("Дата начала: $data_start"),
-                Text("Дата окончания: $data_end"),
-                Text("Параметры: $params"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("№:", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text("$cupon_number"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Код купона:"),
+                    Text("$code"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Тип купона:"),
+                    Text("$type"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Дата начала:"),
+                    Text("$data_start"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Дата окончания:"),
+                    Text("$data_end"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Параметры:"),
+                    Text("$params:"),
+                  ],
+                ),
+                Divider(thickness: 2,)
               ],
             ),
           ),
-          Divider(thickness: 2,)
+
 
         ],
       ),
