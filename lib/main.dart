@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teampro/pages/address_page.dart';
 import 'package:teampro/pages/my_cupons_page.dart';
+import 'package:teampro/pages/my_orders.dart';
 import 'package:teampro/pages/myballs_page.dart';
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: MyCuponsPage(),
+        body: MyOrdersPage(),
       ),
     );
   }
