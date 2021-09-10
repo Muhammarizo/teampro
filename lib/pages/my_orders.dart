@@ -119,66 +119,71 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
     );
   }
   Widget orders(DateTime dateTime, DateTime date, String payment_sts, String delivery_sts, double cost) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white10,
-            blurRadius: 1,
-            offset: Offset(4, 8),
+    return InkWell(
+      onTap: (){
+        // Order Details Page
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white10,
+              blurRadius: 1,
+              offset: Offset(4, 8),
+            )
+          ],
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.4),
           )
-        ],
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: Colors.grey.withOpacity(0.4),
-        )
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(dateTime.toString(), style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-          SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.calendar_today, size: 18,),
-                  SizedBox(width: 8),
-                  Text(date.toString()),
-                ],
-              ),
-              Text("\$$cost", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-            ],
-          ),
-          SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.payment, size: 18),
-              SizedBox(width: 8),
-              Text("Payment Status - $payment_sts"),
-              SizedBox(width: 8),
-              if(payment_sts == "Unpaid")
-                Icon(FontAwesomeIcons.solidTimesCircle, color: Colors.red, size: 18,)
-              else
-        Icon(FontAwesomeIcons.solidCheckCircle, color: Colors.green)
-            ],
-          ),
-          SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.local_shipping_outlined, size: 18,),
-              SizedBox(width: 8),
-              Text("Delivery Status - $delivery_sts")
-            ],
-          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(dateTime.toString(), style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+            SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(Icons.calendar_today, size: 18,),
+                    SizedBox(width: 8),
+                    Text(date.toString()),
+                  ],
+                ),
+                Text("\$$cost", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+              ],
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(Icons.payment, size: 18),
+                SizedBox(width: 8),
+                Text("Payment Status - $payment_sts"),
+                SizedBox(width: 8),
+                if(payment_sts == "Unpaid")
+                  Icon(FontAwesomeIcons.solidTimesCircle, color: Colors.red, size: 18,)
+                else
+          Icon(FontAwesomeIcons.solidCheckCircle, color: Colors.green)
+              ],
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(Icons.local_shipping_outlined, size: 18,),
+                SizedBox(width: 8),
+                Text("Delivery Status - $delivery_sts")
+              ],
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }
