@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teampro/pages/address_page.dart';
 import 'package:teampro/pages/my_cupons_page.dart';
+import 'package:teampro/pages/my_feelings_page.dart';
 import 'package:teampro/pages/my_orders.dart';
 import 'package:teampro/pages/myballs_page.dart';
 import 'package:teampro/pages/order_details_page.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: OrderDetailsPage(),
+        body: MyFeelingsPage(),
       ),
     );
   }
