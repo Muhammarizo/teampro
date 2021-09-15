@@ -4,6 +4,7 @@ import 'package:teampro/pages/my_cupons_page.dart';
 import 'package:teampro/pages/my_feelings_page.dart';
 import 'package:teampro/pages/my_orders.dart';
 import 'package:teampro/pages/myballs_page.dart';
+import 'package:teampro/pages/notfication_page.dart';
 import 'package:teampro/pages/order_details_page.dart';
 void main() => runApp(MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: OrderDetailsPage(),
+        body: NotificationPage(),
       ),
     );
   }
