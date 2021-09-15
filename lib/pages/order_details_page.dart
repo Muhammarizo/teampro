@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   static final String id = "order_details_page";
@@ -12,6 +14,8 @@ class OrderDetailsPage extends StatefulWidget {
 }
 
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
+  int _stepIndex = 0;
+  String comment = "drfdgfdgfdgfdgdfgkdsfgjhfdg";
   Map<String, dynamic> shipping_addres = {
     "Name": "Mr.Customer",
     "Email": "customer@example.com",
@@ -32,233 +36,129 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           title: Text("Order Details", style: TextStyle(color: Colors.pink)),
         ),
         body: ListView(
-          padding: EdgeInsets.all(20),
           children: [
-            //# Icons and descriptions
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                icons(Colors.pink, Icon(Icons.list_alt, color: Colors.pink),
-                    "Order placed"),
-                icons(Colors.blue, Icon(Icons.thumb_up, color: Colors.blue),
-                    "Confirmed"),
-                icons(
-                    Colors.yellow,
-                    Icon(Icons.local_shipping_outlined, color: Colors.yellow),
-                    "On Delivery"),
-                icons(
-                    Colors.purple,
-                    Icon(FontAwesomeIcons.checkDouble, color: Colors.purple),
-                    "Delivered"),
-              ],
-            ),
-            SizedBox(height: 5),
-            // in this line should be checked widget
-            SizedBox(height: 5),
-            order_info(
-                "202110519-10402751",
-                DateTime.now(),
-                "Pending",
-                shipping_addres,
-                "Express",
-                "Cash on Delivery",
-                "Delivered",
-                8140000),
-            SizedBox(height: 8),
-            // Позвонить покупателю button
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(), borderRadius: BorderRadius.circular(1)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Позвонить покупателю",
-                      style: TextStyle(fontWeight: FontWeight.w800)),
-                  InkWell(
-                    onTap: () {
-                      // Позвонить покупателю
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.red,
-                              blurRadius: 4,
-                              offset: Offset(1, 1),
-                            )
-                          ],
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Icon(Icons.call, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8),
-            // postrit marsgrut button
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(), borderRadius: BorderRadius.circular(1)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      child: Text("Построить маршрут доставки",
-                          style: TextStyle(fontWeight: FontWeight.w800))),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // Построить маршрут доставки
-                          },
-                          child: Container(
-                            width: 70,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(67, 168, 160, 1),
-                                    blurRadius: 3,
-                                    offset: Offset(1, 1),
-                                  )
-                                ],
-                                color: Color.fromRGBO(67, 168, 149, 1),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Icon(FontAwesomeIcons.locationArrow,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8),
-            Text("Заметка покупателя",
-                style: TextStyle(fontWeight: FontWeight.w800)),
-            SizedBox(height: 6),
-            // #TextField
-            Container(
-              height: 40,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1), border: Border.all()),
-              child: TextField(
-                showCursor: false,
-                decoration: InputDecoration(
-                  focusedBorder: InputBorder.none,
-                ),
-              ),
-            ),
-            SizedBox(height: 8),
-            Center(
-              child: Text("Ordered Product",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Colors.grey.shade800)),
-            ),
-            SizedBox(height: 8),
+            buildTimeLineTiles(),
             ListView(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.all(20),
               children: [
-                market_name("Shivaki"),
-                ListView.builder(
+                //# Icons and descriptionsSizedBox(height: 5),
+                order_info(
+                    "202110519-10402751",
+                    DateTime.now(),
+                    "Pending",
+                    shipping_addres,
+                    "Express",
+                    "Cash on Delivery",
+                    "Delivered",
+                    8140000),
+                SizedBox(height: 8),
+                SizedBox(height: 8),
+                Center(
+                  child: Text("Ordered Product",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.grey.shade800)),
+                ),
+                SizedBox(height: 8),
+                ListView(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return ordered_product(
-                        "Shivaki",
-                        "images/watch.png",
-                        "Умные часы Apple Watch SE, 44mm, 450 гр",
-                        4500000,
-                        "серый",
-                        "Apple",
-                        1);
-                  },
+                  children: [
+                    market_name("Shivaki"),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return ordered_product(
+                            "Shivaki",
+                            "images/watch.png",
+                            "Умные часы Apple Watch SE, 44mm, 450 гр",
+                            4500000,
+                            "серый",
+                            "Apple",
+                            1);
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    market_name("Apple"),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return ordered_product(
+                            "Shivaki",
+                            "images/watch.png",
+                            "Умные часы Apple Watch SE, 44mm, 450 гр",
+                            4500000,
+                            "серый",
+                            "Apple",
+                            1);
+                      },
+                    )
+                  ],
                 ),
                 SizedBox(height: 10),
-                market_name("Apple"),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return ordered_product(
-                        "Shivaki",
-                        "images/watch.png",
-                        "Умные часы Apple Watch SE, 44mm, 450 гр",
-                        4500000,
-                        "серый",
-                        "Apple",
-                        1);
-                  },
-                )
+                Container(
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/5),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("SUB TOTAL", style: TextStyle(fontWeight: FontWeight.bold)),
+                              SizedBox(height: 10),
+                              Text("SHIPPING COST", style: TextStyle(fontWeight: FontWeight.bold)),
+                              SizedBox(height: 10),
+                              Text("DISCOUNT", style: TextStyle(fontWeight: FontWeight.bold)),
+
+                            ],
+                          ),
+                          SizedBox(width: 50),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("9 000 000 сум", style: TextStyle(fontWeight: FontWeight.bold)),
+                              SizedBox(height: 10),
+                              Text("40 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple)),
+                              SizedBox(height: 10),
+                              Text("900 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
+
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("GRAND TOTAL", style: TextStyle(fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          SizedBox(width: 50),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("8 140 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
+                            ],
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            ),
-            SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/5),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("SUB TOTAL", style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
-                          Text("SHIPPING COST", style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
-                          Text("DISCOUNT", style: TextStyle(fontWeight: FontWeight.bold)),
-
-                        ],
-                      ),
-                      SizedBox(width: 50),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("9 000 000 сум", style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
-                          Text("40 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple)),
-                          SizedBox(height: 10),
-                          Text("900 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("GRAND TOTAL", style: TextStyle(fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      SizedBox(width: 50),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("8 140 000 сум", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
-                        ],
-                      ),
-
-                    ],
-                  ),
-                ],
-              ),
             ),
           ],
         ));
@@ -479,6 +379,21 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               ),
             ],
           ),
+          comment.isEmpty ? SizedBox.shrink() :
+          Align(
+            alignment: Alignment.topLeft,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 6),
+                Text("Заметка покупателя", style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 6),
+                Text(comment),
+              ],
+            ),
+          ),
+
         ],
       ),
     );
@@ -548,6 +463,246 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         Text("Позвонить",
             style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold))
       ],
+    );
+  }
+
+  buildTimeLineTiles() {
+    return SizedBox(
+      height: 100,
+      child: Row(
+
+        children: [
+          TimelineTile(
+            axis: TimelineAxis.horizontal,
+            alignment: TimelineAlign.end,
+            isFirst: true,
+            startChild: Container(
+              width: (MediaQuery.of(context).size.width - 32) / 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.redAccent, width: 2),
+
+                      //shape: BoxShape.rectangle,
+                    ),
+                    child: Icon(
+                      Icons.list_alt,
+                      color: Colors.redAccent,
+                      size: 24,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'order_p'.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey,),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            indicatorStyle: IndicatorStyle(
+              color: _stepIndex >= 0 ? Colors.green : Colors.grey,
+              padding: const EdgeInsets.all(0),
+              iconStyle: _stepIndex >= 0
+                  ? IconStyle(
+                  color: Colors.white, iconData: Icons.check, fontSize: 16)
+                  : null,
+            ),
+            afterLineStyle: _stepIndex >= 1
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+          ),
+          TimelineTile(
+            axis: TimelineAxis.horizontal,
+            alignment: TimelineAlign.end,
+            startChild: Container(
+              width: (MediaQuery.of(context).size.width - 32) / 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.blue, width: 2),
+
+                      //shape: BoxShape.rectangle,
+                    ),
+                    child: Icon(
+                      Icons.thumb_up_sharp,
+                      color: Colors.blue,
+                      size: 24,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'picked'.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey,),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            indicatorStyle: IndicatorStyle(
+              color: _stepIndex >= 1 ? Colors.green : Colors.grey,
+              padding: const EdgeInsets.all(0),
+              iconStyle: _stepIndex >= 1
+                  ? IconStyle(
+                  color: Colors.white, iconData: Icons.check, fontSize: 16)
+                  : null,
+            ),
+            beforeLineStyle: _stepIndex >= 1
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+            afterLineStyle: _stepIndex >= 2
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+          ),
+          TimelineTile(
+            axis: TimelineAxis.horizontal,
+            alignment: TimelineAlign.end,
+            startChild: Container(
+              width: (MediaQuery.of(context).size.width - 32) / 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.amber, width: 2),
+
+                      //shape: BoxShape.rectangle,
+                    ),
+                    child: Icon(
+                      Icons.local_shipping_outlined,
+                      color: Colors.amber,
+                      size: 24,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'way'.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            indicatorStyle: IndicatorStyle(
+              color: _stepIndex >= 2 ? Colors.green : Colors.grey,
+              padding: const EdgeInsets.all(0),
+              iconStyle: _stepIndex >= 2
+                  ? IconStyle(
+                  color: Colors.white, iconData: Icons.check, fontSize: 16)
+                  : null,
+            ),
+            beforeLineStyle: _stepIndex >= 2
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+            afterLineStyle: _stepIndex >= 3
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+          ),
+          TimelineTile(
+            axis: TimelineAxis.horizontal,
+            alignment: TimelineAlign.end,
+            isLast: true,
+            startChild: Container(
+              width: (MediaQuery.of(context).size.width - 32) / 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: Colors.purple, width: 2),
+
+                      //shape: BoxShape.rectangle,
+                    ),
+                    child: Icon(
+                      Icons.done_all,
+                      color: Colors.purple,
+                      size: 24,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'delivered'.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey,),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            indicatorStyle: IndicatorStyle(
+              color: _stepIndex >= 3 ? Colors.green : Colors.grey,
+              padding: const EdgeInsets.all(0),
+              iconStyle: _stepIndex >= 3
+                  ? IconStyle(
+                  color: Colors.white, iconData: Icons.check, fontSize: 16)
+                  : null,
+            ),
+            beforeLineStyle: _stepIndex >= 3
+                ? LineStyle(
+              color: Colors.green,
+              thickness: 5,
+            )
+                : LineStyle(
+              color: Colors.grey,
+              thickness: 4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
